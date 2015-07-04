@@ -1,0 +1,25 @@
+{
+  "name": "CoinGame",
+  "version": "1.0.0",
+  "description": "币游web客户端源码",
+  "main": "web.js",
+  "dependencies": {
+    "express": "^4.13.0",
+    "compression": "^1.5.0",
+    "method-override": "^2.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nearcode/coingame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nearcode/coingame/issues"
+  },
+  "homepage": "https://github.com/nearcode/coingame"
+}
