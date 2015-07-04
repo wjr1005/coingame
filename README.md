@@ -8,9 +8,9 @@
 	网站运行<br>
 	
 目录说明
-	css 存放网站css文件
-	js 存放网站js
-	i18n 存放语言文件
-	public 存放公布库
-	views 存在网站模板文件
+	css 存放网站css文件<br>
+	js 存放网站js<br>
+	i18n 存放语言文件<br>
+	public 存放公布库<br>
+	views 存在网站模板文件<br>
 	
