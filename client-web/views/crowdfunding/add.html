@@ -1,0 +1,61 @@
+<form class="form-horizontal" ng-submit="add()" novalidate>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="title">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">目标</label>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-btc"></i></div>
+                <input type="text" class="form-control" ng-model="goal">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">开始时间</label>
+        <div class="col-sm-4">
+            <p class="input-group">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="startTime" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <label class="col-sm-2 control-label">结束时间</label>
+        <div class="col-sm-4">
+            <p class="input-group">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="endTime" is-open="endOpened" min-date="startTime" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="endOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">资产符号</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" ng-model="symbol">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">封面图片地址</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" ng-model="logo">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">主要内容</label>
+        <div class="col-sm-10">
+            <!--<textarea class="form-control" rows="5" ng-model="content"></textarea>-->
+            <!--<textarea ckeditor ng-model="content" class="form-control"></textarea>-->
+            <!--<textarea ckeditor="editorOptions" ng-model="content"></textarea>-->
+            <textarea ui-tinymce ng-model="content"></textarea>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <input class="btn btn-primary" type="submit" value="{{isModify?'修改':'创建'}}项目">
+    </div>
+</form>

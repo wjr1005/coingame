@@ -1,0 +1,124 @@
+<div ng-controller="HeaderController">
+    <div id="header">
+        <h1></h1>
+        <a id="menu-trigger" href><i class="fa fa-bars"></i></a>
+    </div>
+    <div id="user-nav">
+        <ul class="btn-group" style="width: auto; margin: 0px;">
+            <li ng-if="siteVer != ver" style="padding: 10px 0px;" class="ng-cloak"><code>{{'Please clear the browser cache' | translate}}</code></li>
+            <li class="btn"><i ng-click="sound()" ng-class="isOpenSound?'fa fa-volume-up':'fa fa-volume-off'" style="color: #fff;padding: 11.5px 10px;"></i></li>
+            <li ng-if="!isAuthenticated()" class="btn"><a title="" href="/login"><i class="fa fa-user"></i> <span class="text">{{'Login' | translate}}</span></a></li>
+            <li ng-if="isAuthenticated()" class="btn dropdown" dropdown on-toggle="toggled(open)">
+                <a href class="dropdown-toggle" dropdown-toggle>
+                    <span class="face" ng-if="avatarurl"><img ng-src="{{avatarurl}}" err-src="/public/images/face.jpg"></span>
+                    <span ng-bind="myUserName"></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/profile"><i class="fa fa-user"></i> <span class="text">{{'Profile' | translate}}</span></a>
+                        <a href="/security"><i class="fa fa-history"></i> <span class="text">{{'Security' | translate}}</span></a>
+                        <a ng-click="seed()"><i class="fa fa-random"></i> <span class="text">{{'Change Seed' | translate}}</span></a>
+                        <a href="/referrer"><i class="glyphicon glyphicon-bullhorn"></i> {{'Referrer' | translate}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="isAuthenticated()" class="btn"><a title="" href="javascript:void(0)" ng-click="logout()"><i class="fa fa-share"></i> <span class="text">{{'Logout' | translate}}</span></a></li>
+            <li class="btn">
+                <span class="redu"><span style="width:{{speed}}%"></span></span>
+            </li>
+            <li class="btn dropdown" dropdown>
+                <a href class="dropdown-toggle" dropdown-toggle>
+                    <img ng-src="/public/images/language/{{lang}}.png"> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="min-width:58px">
+                    <li>
+                        <a href ng-click="setLang('zh-CN')"><img src="/public/images/language/zh-CN.png" alt="zh-CN"></a>
+                        <a href ng-click="setLang('en-US')"><img src="/public/images/language/en-US.png" alt="en-US"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-controller="SidebarController" id="sidebar" tabindex="5000">
+        <div id="search">
+            <input type="text" placeholder="Search here..." class=""><button type="submit" class="tip-right" title="" data-original-title="Search"><i class="fa fa-search"></i></button>
+        </div>
+        <ul style="display: block;">
+            <li class="sub"><a href="/"><i class="fa fa-home"></i> <span>{{'Home' | translate}}</span></a></li>
+            <li ng-if="isAuthenticated()" class="sub"><a href="/balances"><i class="fa fa-money"></i> <span>{{'Balances' | translate}}</span></a></li>
+            <li class="sub submenu">
+                <a href=""><i class="fa fa-gamepad"></i> <span>{{'Games' | translate}}</span> <i class="arrow fa fa-chevron-right"></i></a>
+                <ul style="display: none;">
+                    <li><a href="/games/dice">{{'Dice' | translate}}</a></li>
+                    <li><a href="/games/blackjack">{{'BlackJack' | translate}}</a></li>
+                    <!--<li><a href="/games/horse">Horse</a></li>-->
+                    <li><a href="/games/holdem">{{'Holdem' | translate}}</a></li>
+                </ul>
+            </li>
+            <li class="sub submenu">
+                <a href=""><i class="fa fa-exchange"></i> <span>{{'Exchanges' | translate}} </span> <i class="arrow fa fa-chevron-right"></i></a>
+                <ul style="">
+                    <li><a href="/market/coin">{{'Coin' | translate}}</a></li>
+                    <li><a href="/market/stock">{{'Stock' | translate}}</a></li>
+                </ul>
+            </li>
+            <li class="sub"><a href="/crowdfunding"><i class="fa fa-users"></i> <span>{{'Crowdfunding' | translate}}</span></a></li>
+            <li class="sub"><a href="/dividend"><i class="fa fa-bar-chart"></i> <span>{{'Dividend' | translate}}</span></a></li>
+            <li class="sub"><a href="/investments"><i class="fa fa-globe"></i> <span>{{'Investments' | translate}}</span></a></li>
+            <li class="sub submenu">
+                <a href=""><i class="fa fa-file"></i> <span>{{'Statistics' | translate}}</span> <i class="arrow fa fa-chevron-right"></i></a>
+                <ul>
+                    <li><a href="/dailyStatistical"><i class="fa fa-calendar"></i> {{'Betting' | translate}}</a></li>
+                </ul>
+            </li>
+            <li><a href="/faqs"><i class="fa fa-gears"></i> <span>{{'FAQs' | translate}}</span></a></li>
+            <!-- <li><a href="/api"><i class="fa fa-code"></i> <span>API</span></a></li> -->
+            <li><a href="/developer"><i class="fa fa-file-o"></i> <span>开发者</span></a></li>
+            <li><a href="/agent"><i class="fa fa-file-o"></i> <span>代理商说明</span></a></li>
+        </ul>
+    </div>
+
+    <div class="chatBox" ng-click="showMessage()" ng-show="!isShowMessage">
+        <span ng-show="messageAmount>0" class="unreadDot">{{messageAmount}}</span>
+        <i class="fa fa-comments-o"></i>
+    </div>
+    <div id="messages" ng-cloak ng-show="isShowMessage">
+        <form ng-submit="sendMessage()" novalidate>
+            <div class="title">
+                <i class="fa fa-envelope-alt"></i>{{'Chat' | translate}} <a href title="{{'For more chats' | translate}}" class="title-btn" ng-click="moreMessage()" title="more"><i class="fa fa-angle-double-up"></i></a><button type="button" class="close" ng-click="showMessage()">×</button>
+            </div>
+            <div class="content">
+                <ul>
+                    <li ng-repeat="item in messageList" class="message-item">
+                        <div class="face"><img ng-src="{{item.avatarurl}}" err-src="/public/images/face.jpg"></div>
+                        <div class="message-content">
+                            <span class="message-time">
+                                {{item.date | toTimeStr}}
+                            </span>
+                            <span class="message-sender">
+                                {{item.username}}
+                            </span>
+                            <span class="message" ng-bind-html="item.msg">
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="input-group input-group-sm" style="padding: 0px 5px;">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="emotion-btn" type="button">
+                                        <img src="/public/images/emotion_smile.png" style="width:20px;height:20px;">
+                                    </button>
+                                </span>
+                <div id="sayText" class="form-control" placeholder="Say something" contenteditable="true"></div>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default send" type="submit">
+                                        <span class="glyphicon glyphicon-send"></span>
+                                    </button>
+                                </span>
+            </div>
+        </form>
+    </div>
+</div>

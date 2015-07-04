@@ -1,0 +1,19 @@
+<div ng-controller="ChangeEmailController">
+<div class="panel panel-default">
+    <div class="panel-heading"><span class="icon"><i class="fa fa-envelope"></i></span>{{'Change your email address' | translate}}</div>
+    <div class="panel-body">
+        <form name="changeEmailForm" ng-submit="submit()" novalidate>
+            <p>{{'Your current email address' | translate}}: <span class="color-warning" ng-bind="email"></span></p>
+            <div class="form-group">
+                <label for="">{{'Email' | translate}}</label>
+                <input type="email" class="form-control" ng-model="newEmail">
+            </div>
+            <button type="submit" class="btn btn-w-lg btn-success" data-loading-text="Waiting..." ng-disabled="!canSubmit()"><i class="fa fa-lock"></i> {{'Change your email' | translate}}</button>
+            <div class="bs-callout bs-callout-warning">
+                <h4>{{'Email confirmation' | translate}}</h4>
+                <p>{{'The change request becomes active as soon as you activate it via confirmation email.' | translate}}</p>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

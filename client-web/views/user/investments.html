@@ -1,0 +1,81 @@
+<style>
+    .label {
+        font-size: 100%;
+    }
+</style>
+<div class="mini" id="content-header">
+    <h1>{{'Investments' | translate}}</h1>
+
+</div>
+<div id="breadcrumb">
+    <a href="/" title="" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
+    <a href="javascript:void(0)" class="current">{{'Investments' | translate}}</a>
+</div>
+
+<div ng-controller="InvestController">
+  <div class="container-fluid row">
+  <coinlogo></coinlogo>
+  <div class="col-xs-12">
+    <div id="message"></div>
+    <div class="panel panel-default" style="margin-top:10px;">
+      <div class="panel-heading">{{'Return on Investment' | translate}}</div>
+      <table width="100%" border="0" class="table">
+        <tr>
+          <td width="100">&nbsp;</td>
+          <td>{{'Investment' | translate}}</td>
+          <td width="400">{{'Profit' | translate}}</td>
+        </tr>
+        <tr>
+          <td height="30">{{'Site' | translate}}</td>
+          <td><span id="bank" class="label label-default" ng-bind="bank.toFixed(8).formatNumber()"></span></td>
+          <td><span id="profit" class="label label-default" ng-bind="profit.toFixed(8).formatNumber()"></span></td>
+        </tr>
+        <tr>
+          <td height="30">{{'Me' | translate}}</td>
+          <td><span class="label label-default myInvestment" ng-bind="allInvestment.toFixed(8).formatNumber()"></span></td>
+          <td><span id="myProfit" class="label label-default" ng-bind="myprofit.toFixed(8).formatNumber()"></span></td>
+        </tr>
+      </table>
+    </div>
+    <div ng-show="isAuthenticated()" class="panel panel-default">
+      <div class="panel-heading">{{'Investment' | translate}}</div>
+      <div class="panel-body">
+        <div class="col-lg-7">
+          <p><span>{{'Balance' | translate}}</span> <span id="balance" class="label label-default" ng-bind="balance.toFixed(8).formatNumber()"></span> <span class="coin" ng-bind="coin | coinToShortName"></span>. {{'You currently have' | translate}} <span class="label label-default myInvestment" ng-bind="allInvestment.toFixed(8).formatNumber()"></span> <span class="coin" ng-bind="coin | coinToShortName"></span> {{'invested' | translate}}.
+              <p><span>{{'You are supplying' | translate}}<span id="invest_pct" class="label label-default" ng-bind="invest_pct.toFixed(2)"></span> % {{"of the site's bankroll" | translate}}.</span></p>
+          <p><a href="javascript:void(0)" ng-click="ShowInvestors();">{{'Investors' | translate}}</a></p>
+        </div>
+        <div class="col-lg-2">
+          <input type="text" name="invest_input" id="invest_input" ng-model="invest_input" class="form-control input-sm"/>
+        </div>
+        <div class="col-lg-3">
+          <button class="btn btn-primary btn-sm" ng-click="Invest()">{{'Invest' | translate}}</button >
+          or
+          <button class="btn btn-primary btn-sm" ng-click="Invest(balance)">{{'Invest all' | translate}}</button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="isAuthenticated()" class="panel panel-default">
+      <div class="panel-heading">{{'Divest' | translate}}</div>
+      <div class="panel-body">
+        <div class="col-lg-3">
+          <p style="margin-top:8px;">{{"It's for getting your investment back into your balance." | translate}}</p>
+        </div>
+        <div class="col-lg-2">
+          <input type="text" name="divest_input" ng-model="divest_input" class="form-control input-sm" />
+        </div>
+        <div class="col-lg-4">
+          <button class="btn btn-primary btn-sm" id="divest" ng-click="Divest();">{{'Divest' | translate}}</button >
+          or
+          <button class="btn btn-primary btn-sm" id="allDivest" ng-click="Divest(balance);">{{'Divest all' | translate}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">{{'Description' | translate}}</div>
+      <div class="panel-body">
+        {{'The site currently charges a 0.5% commission on net investment profits to cover expenses such as advertising, server hosting, etc.' | translate}}
+      </div>
+    </div>
+  </div>
+</div>

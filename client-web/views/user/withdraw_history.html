@@ -1,0 +1,35 @@
+
+<div class="mini" id="content-header">
+    <h1>{{'Withdrawals History' | translate}}</h1>
+</div>
+<div id="breadcrumb">
+    <a data-original-title="Go to Home" class="tip-bottom" title="" href="/"><i class="fa fa-home"></i> Home</a>
+    <a href="/balances" class="current">{{'Balances' | translate}}</a>
+</div>
+<div class="container-fluid row" ng-controller="WithdrawHistoryController">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="icon"><i class="glyphicon glyphicon-time"></i></span>{{'Withdrawals History' | translate}} ( <span ng-bind="coin"></span> )</div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>{{'Date' | translate}}</td>
+                    <td>{{'Amount' | translate}}</td>
+                    <td>{{'Withdrawal Address' | translate}}</td>
+                    <td>TX_ID</td>
+                    <td>{{'Result' | translate}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in historyList">
+                    <td>{{item.date | toTimeStr}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.tx_id}}</td>
+                    <td><span ng-show="item.result==''">{{'Processing' | translate}}</span><span ng-show="item.result=='success'">{{'Success' | translate}}</span><span ng-show="item.result=='cancel'">{{'Cancel' | translate}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

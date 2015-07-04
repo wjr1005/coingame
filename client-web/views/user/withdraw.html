@@ -1,0 +1,35 @@
+    <form name="withdrawForm" ng-submit="submit()" novalidate>
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel();">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">{{'Withdrawals' | translate}}</h4>
+        </div>
+        <div class="modal-body" style="text-align:center;">
+            <div style="color:#F00;text-align:center;">
+                <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+            </div>
+            <div class="form-horizontal">
+                <h2>{{'Balance' | translate}}: <span ng-bind="balance.toFloat()"></span></h2>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">{{'Amount' | translate}}</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control input-sm" name="amount" ng-model="amount" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">{{'Withdrawal Address' | translate}}</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control input-sm" name="withdrawAddress" ng-model="withdrawAddress" required>
+                    </div>
+                    <small class="pull-left control-label">
+                        {{fee}} {{'Fee' | translate}}
+                    </small>
+                </div>
+            </div>
+            <p></p>
+            <small ng-if="coin == 'BitSharesX'" style="color: #ff0000">提现地址必须是已注册过的别名，要不不能到帐。</small>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="cancel();">Close</button>
+            <button type="submit" class="btn btn-primary" data-loading-text="Waiting..." ng-disabled="!canSubmit()">Confirm</button>
+        </div>
+    </form>

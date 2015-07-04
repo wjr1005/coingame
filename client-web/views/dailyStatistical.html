@@ -1,0 +1,34 @@
+<div class="mini" id="content-header">
+    <h1>{{'Daily Statistical' | translate}}</h1>
+</div>
+<div id="breadcrumb">
+    <a class="tip-bottom" title="" href="/"><i class="fa fa-home"></i> {{'Home' | translate}}</a>
+</div>
+
+<div ng-controller="DailyStatisticalController" class="container-fluid">
+    <coinlogo></coinlogo>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default" ng-repeat="item in timerList" ng-click="getData(item.date)">{{item.date|toDayStr}}</button>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="">{{'Date' | translate}}:<code>{{date | toDayStr}}</code>     {{'Accounts' | translate}}:<code>{{dailyStatistical | getObjectLength}}</code>     Bet:<code>{{totalBet.toFixed(8)}}</code>        {{'Profit' | translate}}:<code>{{totalProfit.toFixed(8)}}</code></div>
+            <table class="table table-striped">
+                <tr style="font-weight:bold;">
+                    <td>{{'Account' | translate}}</td>
+                    <td>{{'Bet' | translate}}</td>
+                    <td>{{'Wins' | translate}}</td>
+                    <td>{{'Losses' | translate}}</td>
+                    <td>{{'Profit' | translate}}</td>
+                </tr>
+                <tr ng-repeat="(k, v) in dailyStatistical">
+                    <td>{{k}}</td>
+                    <td>{{v.bet.toFixed(8)}} <span class="label label-default" style="font-size: 10px">{{coin}}</span></td>
+                    <td>{{v.wins}}</td>
+                    <td>{{v.losses}}</td>
+                    <td>{{v.profit.toFixed(8)}} <span class="label label-default" style="font-size: 10px">{{coin}}</span></td>
+                </tr>
+
+            </table>
+
+    </div>
+</div>

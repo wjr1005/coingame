@@ -1,0 +1,213 @@
+<style>
+    .table small {
+        font-size: 12px;
+        opacity: 0.5;
+    }
+    .result .header {
+        font-weight: bold;
+    }
+    .table.result td{
+        line-height:18px;
+    }
+
+    .roll tr td {
+        padding: 3px;
+    }
+
+    #diceFrame {
+        /*margin-top: 30px;*/
+    }
+
+    #btn_roll_high, #btn_roll_low {
+        z-index: 2000;
+        width: 100%;
+        height: 87px;
+        margin-top: 10px;
+    }
+
+    #diceInfo, #diceAction, #diceTable {
+        color: #000;
+        background-color: #fff;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-radius:6px;
+    }
+
+    .result .text {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .result .win .text {
+        color: #080;
+    }
+    .result .lose .text {
+        color: rgb(189, 29, 29);
+    }
+</style>
+
+<div id="diceFrame" class="container-fluid" ng-controller="DiceController">
+    <coinlogo></coinlogo>
+    <div id="diceInfo" style="margin-top:10px;">
+        <div class="row">
+            <div class="col-xs-7">
+                <div class="col-xs-3">
+                    <div style="font-weight:bold; font-size:18px;">{{'Balance' | translate}}</div>
+                    <div id="user_balance"></div>
+                </div>
+                <div class="col-xs-4">
+                    <div style="font-weight:bold; font-size:18px;">{{'Win' | translate}} / {{'Loss' | translate}}</div>
+                    <span id="user_wins"></span> / <span id="user_losses"></span>
+                </div>
+                <div class="col-xs-5">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div style="font-weight:bold; font-size:18px;">{{'Wagered' | translate}}</div>
+                            <div id="user_bet"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div style="font-weight:bold; font-size:18px;">{{'Profit' | translate}}</div>
+                            <div id="user_profit"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="col-xs-8">
+                    <div class="col-lg-6">
+                        <div style="font-weight:bold; font-size:18px;">{{'Bankroll' | translate}}</div>
+                        <div id="bank"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="font-weight:bold; font-size:18px;">{{'Wagered' | translate}}</div>
+                        <div id="site_bet"></div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div style="font-weight:bold; font-size:18px;">{{'Max Win' | translate}}</div>
+                    <div id="site_max_bet_profit"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="diceAction" style="margin-top: 10px;">
+        <div class="row" style="margin: 0px 15px;">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <div class="input-group-addon">{{'Payout' | translate}}</div>
+                    <input type="text" id="payout" class="form-control">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon">{{'Profit' | translate}}</div>
+                    <input type="text" id="bet_profit" class="form-control" disabled="disabled">
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-8 col-lg-5">
+                <div class="input-group">
+                    <div class="input-group-addon">{{'Odds' | translate}}</div>
+                    <input type="text" class="form-control" id="win_odds">
+                    <div class="input-group-addon" style="border-left: 0">%</div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-min" id="o_min" type="button">{{'Min' | translate}}</button>
+                        <button class="btn btn-default btn-mul" id="minus" type="button">-1</button>
+                        <button class="btn btn-default btn-mul" id="plus" type="button">+1</button>
+                        <button class="btn btn-default btn-max" id="o_max" type="button">{{'Max' | translate}}</button>
+                    </span>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon">{{'Bet' | translate}} </div>
+                    <input type="text" id="bet_amount" class="form-control">
+                    <div class="input-group-addon" style="border-left: 0" ng-bind="coin | coinToShortName"></div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-min" id="b_min" type="button">{{'Min' | translate}}</button>
+                        <button class="btn btn-default btn-mul" id="half" type="button">/2</button>
+                        <button class="btn btn-default btn-mul" id="double" type="button">x2</button>
+                        <button class="btn btn-default btn-max" id="b_max" type="button">{{'Max' | translate}}</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-12 col-lg-3" style="text-align: center">
+                <div id="bet_buttons" class="row">
+                    <div class="col-xs-6">
+                        <button id="btn_roll_high" class="btn btn-large btn-success">{{'High' | translate}} &gt;&nbsp;<small id="roll_high"></small></button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button id="btn_roll_low" class="btn btn-large btn-primary">{{'Low' | translate}} &lt;&nbsp;<small id="roll_low"></small></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="diceTable" style="margin-top:10px; margin-bottom: 10px;">
+        <div class="row" style="margin: 0px 15px;">
+            <!-- Tab panes -->
+            <tabset>
+                <tab heading="{{'All Bets' | translate}}">
+                    <table class="table result">
+                        <thead>
+                        <tr class="header">
+                            <td>{{'Account' | translate}}</td>
+                            <td>{{'Date' | translate}}</td>
+                            <td>{{'Bet ID' | translate}}</td>
+                            <td>{{'Lucky' | translate}}</td>
+                            <td>{{'Target' | translate}}</td>
+                            <td>{{'Bet' | translate}}</td>
+                            <td>{{'Payout' | translate}}</td>
+                            <td>{{'Profit' | translate}}</td>
+                        </tr>
+                        </thead>
+                        <tbody id="allBets">
+                            <tr ng-repeat="item in resultList" class="{{item.class}}"><td>{{item.username}}</td><td>{{item.date|toTimeStr}}</td><td><a href="javascript:void(0)" ng-click="roll(item.id);">{{item.id}}</a></td><td class="text" ng-bind-html="item.lucky"></td><td>{{item.condition}}</td><td class="text"><span ng-bind-html="item.bet"></span><span class="label label-default" style="font-size: 10px">{{item.coin|coinToShortName}}</span></td><td><span ng-bind-html="item.payout"></span>x</td><td class="text"><span ng-bind-html="item.profit"></span><span class="label label-default" style="font-size: 10px">{{item.coin|coinToShortName}}</span></td></tr>
+                        </tbody>
+                    </table>
+                </tab>
+                <tab heading="{{'My Bets' | translate}}">
+                    <table class="table result">
+                        <thead>
+                        <tr class="header">
+                            <td>{{'Account' | translate}}</td>
+                            <td>{{'Date' | translate}}</td>
+                            <td>{{'Bet ID' | translate}}</td>
+                            <td>{{'Lucky' | translate}}</td>
+                            <td>{{'Target' | translate}}</td>
+                            <td>{{'Bet' | translate}}</td>
+                            <td>{{'Payout' | translate}}</td>
+                            <td>{{'Profit' | translate}}</td>
+                        </tr>
+                        </thead>
+                        <tbody id="myBets">
+                        <tr ng-repeat="item in myResultList" class="{{item.class}}"><td>{{item.username}}</td><td>{{item.date|toTimeStr}}</td><td><a href="javascript:void(0)" ng-click="roll(item.id);">{{item.id}}</a></td><td class="text" ng-bind-html="item.lucky"></td><td>{{item.condition}}</td><td class="text"><span ng-bind-html="item.bet"></span><span class="label label-default" style="font-size: 10px">{{item.coin|coinToShortName}}</span></td><td><span ng-bind-html="item.payout"></span>x</td><td class="text"><span ng-bind-html="item.profit"></span><span class="label label-default" style="font-size: 10px">{{item.coin|coinToShortName}}</span></td></tr>
+                        </tbody>
+                    </table>
+                </tab>
+                <tab heading="{{'Fair' | translate}}">
+                    <br>
+                    <p>{{'This game is provably fair, which means you can verify every dice roll to make sure the result is fair.' | translate}}</p>
+                    <p>{{'When you press the User menu bar [Change Seed] button, the system will generate a random seed server SHA256 hash value, and then a random seed with customers set their own clients, and betting serial number, we the merger of the three data operations, and randomly generate a fair bet results.' | translate}}</p>
+                </tab>
+                <!--<tab heading="Seed">-->
+                    <!--<div id="seed_msg" style="color:#F00;text-align:center;"></div>-->
+                    <!--<div class="form-horizontal">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-xs-3">Client Seed</label>-->
+                            <!--<div class="col-xs-6">-->
+                                <!--<input type="text" id="client_seed" ng-change="ChangeClientSeed();" name="client_seed" placeholder="Client Seed" class="form-control" ng-model="cseed">-->
+                            <!--</div>-->
+                            <!--<label class="control-label col-xs-3" style="text-align:left;"></label>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-xs-3">Server Seed Hash</label>-->
+                            <!--<div class="col-xs-6">-->
+                                <!--<textarea id="server_seed_hash" disabled="" class="input-large form-control" style="width:100%; height:80px;" ng-model="shash"></textarea>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-xs-offset-3 col-xs-6"><button type="button" class="btn btn-success" ng-click="random();">Randomize</button></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

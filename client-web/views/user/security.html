@@ -1,0 +1,34 @@
+<div class="mini" id="content-header">
+    <h1>Security</h1>
+
+</div>
+<div id="breadcrumb">
+    <a href="/" title="" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
+    <a href class="current">Security</a>
+</div>
+<div class="container-fluid" ng-controller="SecurityController">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-heading">Account Activity</div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>IP Address</th>
+                        <th>When</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in historyList">
+                        <td>{{item.action}}</td>
+                        <td>{{item.ip}}</td>
+                        <td>{{item.date | toTimeStr}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pagination items-per-page="20" boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
+    </div>
+</div>

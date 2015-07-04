@@ -1,0 +1,75 @@
+<style>
+    .contentFrame {
+        overflow: visible;
+    }
+</style>
+
+<div class="mini" id="content-header">
+    <h1>{{'Balances' | translate}}</h1>
+</div>
+<div id="breadcrumb">
+    <a class="tip-bottom" title="" href="/"><i class="fa fa-home"></i> {{'Home' | translate}}</a>
+    <a href="javascript:void(0)" class="current">{{'Balances' | translate}}</a>
+</div>
+<div class="container-fluid row" ng-controller="BalancesController">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="icon"><i class="fa fa-money"></i></span>{{'The Account Balance' | translate}} ( {{'Estimation' | translate}} : <span style="color: #FF6600;" ng-bind="totalBalance"></span><small> BTC</small> )</div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>{{'Currency Name' | translate}}</th>
+                    <th>{{'Available Balance' | translate}}</th>
+                    <th>{{'Held for Orders' | translate}}</th>
+                    <th>{{'Held for Investments' | translate}}</th>
+                    <th>{{'BTC Value' | translate}}</th>
+                    <th>{{'Actions' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in coins">
+                    <td><span ng-bind="item.coin"></span> <span ng-show="item.offline">(<font style="color: red">{{'offline' | translate}}</font>)</span></td>
+                    <td><span ng-bind="item.balance.toFixed(8)"></span> <span style="color: #e9322d" ng-show="item.unconfirmed > 0" ng-bind="'+'+item.unconfirmed"></span></td>
+                    <td ng-bind="item.order.toFixed(8)"></td>
+                    <td ng-bind="item.investment.toFixed(8)"></td>
+                    <td ng-bind="item.btcValue.toFixed(8)"></td>
+                    <td>
+                        <div class="btn-group" dropdown is-open="status.isopen">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                {{'Actions' | translate}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-show="item.wallet"><a href="javascript:void(0)" ng-click="DepositDialog(item.coin);">{{'Deposits' | translate}}</a></li>
+                                <li ng-show="item.wallet"><a href="javascript:void(0)" ng-click="WithdrawDialog(item.coin);">{{'Withdrawals' | translate}}</a></li>
+                                <li><a href="javascript:void(0)" ng-click="TransferDialog(item.coin);">{{'Internal transfer' | translate}}</a></li>
+                                <li ng-show="item.wallet"><a href="/history/deposit/{{item.coin}}">{{'View Deposits' | translate}}</a></li>
+                                <li ng-show="item.wallet"><a href="/history/withdraw/{{item.coin}}">{{'View Withdrawals' | translate}}</a></li>
+                                <li><a href="/history/transfer/{{item.coin}}">{{'View Transfer' | translate}}</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12" ng-if="site">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="icon"><i class="fa fa-money"></i></span> {{'The Agent Income' | translate}} ( {{'Estimation' | translate}} : <span style="color: #FF6600;" ng-bind="totalAgent"></span><small> BTC</small> ) 玩家数量:<span class="badge">{{agentPlayerAcount}}</span></div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>{{'Currency Name' | translate}}</th>
+                    <th>{{'Balance' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key, value) in agents">
+                    <td><span ng-bind="key"></span></td>
+                    <td><span ng-bind="value.toFixed(8)"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

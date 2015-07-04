@@ -1,0 +1,35 @@
+
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel();">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">
+          Investors
+      </h4>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped" style="margin-bottom:-20px;">
+          <tr>
+            <td>Amount</td>
+            <td>Investment</td>
+            <td>Share</td>
+            <td>Profit</td>
+          </tr>
+          <tr>
+            <td ng-if="resultList.length == 0" colspan="4">loading</td>
+          </tr>
+          <tr ng-repeat="item in resultList">
+            <td ng-bind="item.username"></td>
+            <td ng-bind="item.investment.toFixed(8)"></td>
+            <td ng-bind="item.invest_pct.toFixed(2)+'%'"></td>
+            <td ng-bind="item.profit.toFixed(8)"></td>
+          </tr>
+            <tr>
+            <td></td>
+            <td ng-bind="allInvestment.toFixed(8)"></td>
+            <td ng-bind="allShare.toFixed(2)"></td>
+            <td ng-bind="allProfit.toFixed(8)"></td>
+          </tr>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="cancel();">关闭</button>
+    </div>

@@ -1,0 +1,23 @@
+<div class="container-fluid" style="margin-top: 15px;" ng-controller="MarketController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <a href="javascript:history.back(-1)" class="returnIcon"><i class="fa fa-reply"></i></a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/market/myOrder" class="btn btn-default"><i class="fa fa-list"></i> 我的挂单</a>
+                            <a href="/market/tradeHistory" class="btn btn-default"><i class="fa fa-history"></i> 成交历史</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ui-view="content">
+
+            </div>
+        </div>
+    </div>
+</div>

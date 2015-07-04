@@ -1,0 +1,28 @@
+<div class="panel panel-default" style="margin-bottom:0px;">
+    <div class="panel-heading">我的最新挂单</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>时间</th>
+                <th>类型</th>
+                <th>币种</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>总计（BTC）</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in resultList">
+                <td>{{item.date | toTimeStr}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.type=='sell'?item.fromCoin:item.toCoin}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{(item.price*item.amount).toFixedEx(8)}}</td>
+                <td><button ng-click="cancleOrder(item.id)" class="btn btn-success btn-xs">Cancel</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <pagination items-per-page="50" boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>

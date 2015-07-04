@@ -1,0 +1,339 @@
+<style>
+    /*登陆*/
+    a.grey {
+        color: #aaaaaa;
+    }
+    a.blue {
+        font-weight: bold;
+    }
+    @media (max-width: 400px) {
+        a.grey,
+        a.blue {
+            font-size: 12px;
+        }
+    }
+    #container {
+        margin: 20px auto 25px auto;
+    }
+    @media (max-width: 480px) {
+        #container {
+            margin: 20px 5% 0;
+            left: auto;
+            width: 90%;
+        }
+    }
+    #logo, #loginbox {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (max-width: 480px) {
+        #logo,
+        #loginbox {
+            width: 100%;
+        }
+    }
+    #logo {
+        padding: 20px 0 20px 5px;
+    }
+    #logo img {
+        margin: 0 auto;
+        display: block;
+    }
+    #user {
+        width: 100%;
+        height: 100px;
+        opacity: 0;
+    }
+    #user,
+    #user .avatar,
+    #user .inner,
+    #user .text {
+        position: absolute;
+    }
+    #user .avatar {
+        border: 2px solid #ffffff;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+        left: 45px;
+        top: 10px;
+    }
+    #user .inner {
+        background-image: -moz-linear-gradient(-55deg, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+    }
+    #user .avatar,
+    #user .inner {
+        width: 75px;
+        height: 75px;
+        overflow: hidden;
+        border-radius: 40px;
+    }
+    #user .text {
+        top: 17px;
+        left: 150px;
+        font-size: 16px;
+        color: #ffffff;
+        text-shadow: 0 1px 0 #000000;
+    }
+    #user .user_name {
+        display: block;
+        font-size: 24px;
+    }
+    #loginbox {
+        background: #ffffff;
+        box-shadow: 0 0 4px #000000;
+        border-radius: 7px;
+        overflow: hidden !important;
+        text-align: center;
+    }
+    #loginbox form {
+        width: 100%;
+        height: 100%;
+    }
+    #loginbox form#loginform {
+        z-index: 200;
+    }
+    #loginbox form#recoverform {
+        z-index: 100;
+        display: none;
+    }
+    #loginbox form#recoverform .control-group {
+        margin: 23px 0;
+    }
+    #loginbox form#registerform {
+        z-index: 100;
+        display: none;
+    }
+    #loginbox p {
+        margin-top: 15px;
+        padding: 0 20px;
+    }
+    @media (max-width: 400px) {
+        #loginbox p {
+            font-size: 12px !important;
+        }
+    }
+    #loginbox .form-actions {
+        padding: 5px 20px 15px;
+        border-radius: 0 0 30px 30px;
+    }
+    #loginbox .form-actions .pull-left,
+    #loginbox .form-actions .pull-right {
+        margin-bottom: 10px;
+    }
+    #loginbox .form-actions .pull-left {
+        text-align: left;
+    }
+    #loginbox .form-actions .pull-right {
+        text-align: right;
+    }
+    .input-group {
+        padding: 0 20px 5px;
+    }
+    .footer-login {
+        border-top: 1px solid #e6e6e6;
+    }
+    .footer-login .text {
+        font-size: 16px;
+        font-weight: bold;
+        color: #555555;
+        padding: 12px 20px;
+    }
+    .btn-inverse {
+        color: #ffffff;
+        background-color: #555555;
+        border-color: #494949;
+    }
+    .btn-inverse:hover,
+    .btn-inverse:focus,
+    .btn-inverse:active,
+    .btn-inverse.active,
+    .open .dropdown-toggle.btn-inverse {
+        color: #ffffff;
+        background-color: #414141;
+        border-color: #2a2a2a;
+    }
+    .btn-inverse:active,
+    .btn-inverse.active,
+    .open .dropdown-toggle.btn-inverse {
+        background-image: none;
+    }
+    .btn-inverse.disabled,
+    .btn-inverse[disabled],
+    fieldset[disabled] .btn-inverse,
+    .btn-inverse.disabled:hover,
+    .btn-inverse[disabled]:hover,
+    fieldset[disabled] .btn-inverse:hover,
+    .btn-inverse.disabled:focus,
+    .btn-inverse[disabled]:focus,
+    fieldset[disabled] .btn-inverse:focus,
+    .btn-inverse.disabled:active,
+    .btn-inverse[disabled]:active,
+    fieldset[disabled] .btn-inverse:active,
+    .btn-inverse.disabled.active,
+    .btn-inverse[disabled].active,
+    fieldset[disabled] .btn-inverse.active {
+        background-color: #555555;
+        border-color: #494949;
+    }
+    .btn-social .btn {
+        display: inline-block;
+        font-size: 20px;
+        border-left: 1px solid #e6e6e6;
+        color: #888888;
+        padding: 9px 0 10px;
+        margin: 0 0 0 -4px;
+        border-radius: 0;
+    }
+    .btn-social .btn:hover {
+        color: #fff;
+    }
+    .btn-social .btn.btn-facebook:hover {
+        background-color: #428bca;
+    }
+    .btn-social .btn.btn-twitter:hover {
+        background-color: #5bc0de;
+    }
+    .btn-social .btn.btn-google-plus:hover {
+        background-color: #d9534f;
+    }
+    .btn-social .btn.btn-weibo:hover {
+        background-color: #FFD306;
+    }
+    .btn-social .btn.btn-qq:hover {
+        background-color: #ccc;
+    }
+    .btn-social .btn i {
+        padding: 0 15px 0 17px;
+    }
+    hr {
+        margin: 8px 0 -5px;
+    }
+</style>
+<div id="container">
+    <div id="logo">
+        <img src="/public/images/logo.png" alt="">
+    </div>
+    <!--<div id="user">-->
+        <!--<div class="avatar">-->
+            <!--<div class="inner"></div>-->
+            <!--<img src="img/demo/av1_1.jpg">-->
+        <!--</div>-->
+        <!--<div class="text">-->
+            <!--<h4>Hello,<span class="user_name"></span></h4>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div id="loginbox">
+        <div ng-init="checkIsLogin()" ng-controller="SigninController">
+            <form id="loginform" name="loginform" novalidate>
+                <p>{{'Enter username and password to continue.' | translate}}</p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="text" placeholder="{{'Username' | translate}}" name="username" ng-model="login_username" ng-pattern="/^s*[.A-Za-z0-9_-]*$/" ng-minlength=3 ng-maxlength=20 required>
+                    <div class="help-block text-danger" ng-if="loginform.username.$dirty" ng-messages="loginform.username.$error">
+                        <div ng-message="required">{{'Username is required.' | translate}}</div>
+                        <div ng-message="minlength">{{'Username is required to be at least 3 characters.' | translate}}</div>
+                        <div ng-message="maxlength">{{'Username cannot be longer than 20 characters.' | translate}}</div>
+                        <div ng-message="pattern">{{'User name can not contain special characters.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <!--ng-pattern="/(?=.{8,})((?=.*[^A-Za-z])(?!.*[.\n]))(?=.*[A-Z])(?=.*[a-z])[^\s]*/"-->
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" type="password" placeholder="{{'Password' | translate}}" name="password" ng-model="login_password" ng-minlength=8 ng-maxlength=20 required>
+                    <div class="help-block text-danger" ng-if="loginform.password.$dirty" ng-messages="loginform.password.$error">
+                        <div ng-message="required">{{'Password is required.' | translate}}</div>
+                        <div ng-message="minlength">{{'Password is required to be at least 8 characters.' | translate}}</div>
+                        <div ng-message="maxlength">{{'Password cannot be longer than 20 characters.' | translate}}</div>
+                        <div ng-message="pattern">{{'A password must contain at least 1 upper case letter, 1 lower case letter, 1 number or special character.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key"></i></span><input class="form-control" type="text" placeholder="{{'Google authenticator' | translate}}" ng-model="gauth">
+                </div>
+                <div class="form-actions clearfix">
+                    <div class="pull-left">
+                        <a href="" ng-click="register()" class="flip-link to-register blue">{{'Create new account' | translate}}</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="" ng-click="recover()" class="flip-link to-recover grey">{{'Lost password?' | translate}}</a>
+                    </div>
+                    <input ng-click="loginSubmit()" type="submit" class="btn btn-block btn-primary btn-default" value="{{'Login' | translate}}" ng-disabled="!loginCanSubmit()">
+                </div>
+                <div class="footer-login">
+                    <div class="pull-left text">
+                        {{'Login with' | translate}}
+                    </div>
+                    <div class="pull-right btn-social">
+                    	<a class="btn btn-qq" href="#"><i class="fa fa-qq"></i></a>
+                    	<a class="btn btn-weibo" href="#"><i class="fa fa-weibo"></i></a>
+                        <a class="btn btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="btn btn-twitter" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+
+            </form>
+
+            <form id="recoverform" name="recoverform" novalidate>
+                <p>{{'Enter your e-mail address below and we will send you instructions how to recover a password.' | translate}}</p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span><input name="email" ng-model="email" class="form-control" type="email" placeholder="{{'Email address' | translate}}" ng-pattern="/[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required>
+                    <div class="help-block text-danger" ng-if="recoverform.email.$dirty" ng-messages="recoverform.email.$error">
+                        <div ng-message="required">{{'Your email address is required.' | translate}}</div>
+                        <div ng-message="pattern">{{'Your email address is invalid.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="form-actions clearfix">
+                    <div class="pull-left">
+                        <a href="" ng-click="login()" class="grey flip-link to-login">{{'Click to login' | translate}}</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="" ng-click="register()" class="blue flip-link to-register">{{'Create new account' | translate}}</a>
+                    </div>
+                    <input ng-click="recoverSubmit()" ng-disabled="!recoverCanSubmit()" type="submit" class="btn btn-block btn-inverse" value="{{'Recover' | translate}}">
+                </div>
+            </form>
+
+            <form id="registerform" name="registerform" novalidate>
+                <p>{{'Enter information required to register' | translate}}</p>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="text" placeholder="{{'Username' | translate}}" name="username" ng-model="reg_username" value="{{username}}" ng-pattern="/^s*[.A-Za-z0-9_-]*$/" ng-minlength=3 ng-maxlength=20 required>
+                    <div class="help-block text-danger" ng-if="registerform.username.$dirty" ng-messages="registerform.username.$error">
+                        <div ng-message="required">{{'Username is required.' | translate}}</div>
+                        <div ng-message="minlength">{{'Username is required to be at least 3 characters.' | translate}}</div>
+                        <div ng-message="maxlength">{{'Username cannot be longer than 20 characters.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span><input password-strength class="form-control" type="password" placeholder="{{'Password' | translate}}" name="password" ng-model="reg_password" ng-minlength="8" ng-maxlength="20" required>
+                    <div class="help-block text-danger" ng-if="registerform.password.$dirty" ng-messages="registerform.password.$error">
+                        <div ng-message="required">{{'Password is required.' | translate}}</div>
+                        <div ng-message="minlength">{{'Password is required to be at least 8 characters.' | translate}}</div>
+                        <div ng-message="maxlength">{{'Password cannot be longer than 20 characters.' | translate}}</div>
+                        <div ng-message="pattern">{{'A password must contain at least 1 upper case letter, 1 lower case letter, 1 number or special character.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span><input class="form-control" type="password" placeholder="{{'Confirm password' | translate}}" name="password2" password-match="reg_password" ng-model="reg_password2" required>
+                    <div class="help-block text-danger" ng-if="registerform.password2.$dirty" ng-messages="registerform.password2.$error">
+                        <div ng-message="compareTo">{{'Password must match.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span><input class="form-control" type="email" placeholder="{{'Email address' | translate}}" name="reg_email" ng-model="reg_email" ng-pattern="/[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required>
+                    <div class="help-block text-danger" ng-if="registerform.reg_email.$dirty" ng-messages="registerform.reg_email.$error">
+                        <div ng-message="required">{{'Your email address is required.' | translate}}</div>
+                        <div ng-message="pattern">{{'Your email address is invalid.' | translate}}</div>
+                    </div>
+                </div>
+                <div class="form-actions clearfix">
+                    <div class="pull-left">
+                        <a href="" ng-click="login()" class="grey flip-link to-login">{{'Click to login' | translate}}</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="" ng-click="recover()" class="grey flip-link to-recover">{{'Lost password?' | translate}}</a>
+                    </div>
+                    <input ng-click="registerSubmit()" ng-disabled="!registerCanSubmit()" type="submit" class="btn btn-block btn-success" value="{{'Register' | translate}}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

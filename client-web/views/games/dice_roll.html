@@ -1,0 +1,25 @@
+
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel();" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">{{'Verification' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+            <ul class="list-group" style="margin-bottom:-5px;">
+                <li class="list-group-item"> <span class="badge" ng-bind="result.id"></span> {{'Bet ID' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.date|toTimeStr"></span> {{'Date' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.username"></span> {{'Account' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.payout"></span> {{'Payout' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.bet"></span> {{'Bet' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.profit"></span> {{'Profit' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.lucky"></span> {{'Lucky' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.result"></span> {{'Result' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.shash"></span> {{'Hash of server seed' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.sseed"></span> {{'Server seed' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.cseed"></span> {{'Client seed' | translate}} </li>
+                <li class="list-group-item"> <span class="badge" ng-bind="result.nonce"></span> {{'Nonce' | translate}} </li>
+                <li class="list-group-item"> <a target="_blank" href="http://rgbkey.github.io/just-dice/" style="color: #c12e2a; font-weight:bold;">{{'Verify address' | translate}}</a> </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel();">关闭</button>
+        </div>

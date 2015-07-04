@@ -1,0 +1,173 @@
+<style>
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    ul,li,div {
+         margin: 0;
+         padding: 0;
+     }
+    .coinMenu {
+        top: 115px;
+        right: 10px;
+    }
+/*    #headerFrame {
+        display: none;
+    }
+    #headerFrame, #footer {
+        display: none;
+    }*/
+    .contentFrame {
+        margin: 0;
+    }
+    #BlackJack {
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        overflow: hidden;
+        display: block;
+        /*box-shadow: 0 0 15px #6ac8f8;
+        margin: 0px auto 0 auto;
+        border-radius: 10px;*/
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        position: relative;
+        z-index: 10;
+    }
+    .BlackJackFrame .Room {
+        position:absolute;
+        left:50%;
+        margin-left:-200px;
+        width:400px;
+        color:#000;
+        margin-top:150px;
+        z-index:1000;
+        display:none;
+    }
+    .BlackJackFrame .tools {
+        /*transform:scale(0.6, 0.6);*/
+    }
+    .BlackJackFrame .tools .tool {
+        background: url("/games/blackjack/images/tools.png") no-repeat scroll 0 0 transparent;
+        width: 48px;
+        height: 48px;
+        position: absolute;
+        top: 10px;
+        z-index: 200;
+        background-size: 336px 48px;
+        /*float: left;*/
+        /*margin: 0px 5px;*/
+    }
+    .BlackJackFrame .tools .tool:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    .BlackJackFrame .tools .sound {
+        background-position: -48px 0;
+        right: 84px;
+    }
+    .BlackJackFrame .tools .home {
+        background-position: 0 0;
+        left: 10px;
+    }
+    .BlackJackFrame .tools .exit {
+        background-position: -240px 0;
+        right: 10px;
+        display: none;
+    }
+    .BlackJackFrame .tools .screen {
+        background-position: -192px 0;
+    }
+    .BlackJackFrame .tools .fair {
+        background-position: -288px 0;
+        right: 158px;
+    }
+    .BlackJackFrame .fairBox {
+        position: absolute;
+        width: 500px;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        left: 50%;
+        top: 100px;
+        z-index: 100;
+        background: rgba(255,255,255,.8);
+        border-radius: 5px;
+        border: 1px solid rgba(255,255,255,.2);
+        padding: 10px;
+        font-size: 12px;
+        display: none;
+    }
+    .fairBox .verify {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        font-size: 12px;
+        color: #d4d4d4;
+        background: #444;
+        padding: 5px 10px;
+        padding-bottom: 3px;
+        cursor: pointer;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .BlackJackFrame .form-group-sm {
+        padding: 5px 0px;
+    }
+</style>
+
+<div class="BlackJackFrame" ng-controller="BlackJackController">
+	<coinlogo></coinlogo>
+    <div class="tools">
+        <div class="home tool" ng-click="home()"></div>
+        <div class="fair tool" ng-click="fair()"></div>
+        <div class="sound tool" ng-click="sound()"></div>
+        <div class="exit tool" ng-click="exit()"></div>
+    </div>
+    <div class="Room">
+        <ul class="list-group">
+            <li class="list-group-item active" style="font-weight:bold;"> <span class="badge">Number</span> Room name </li>
+        </ul>
+    </div>
+    <div class="fairBox">
+        <form class="form-horizontal">
+            <h4>{{'This hand' | translate}}</h4>
+            <a class="verify" href="http://jsfiddle.net/nearbtc/7vm2c41k/" target="_blank">{{'Verify hand' | translate}}</a>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-3 control-label">{{'Client seed' | translate}}</label>
+                <div class="col-sm-9">
+                    <input readonly="readonly" type="text" class="form-control" id="now_client_seed">
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-3 control-label">{{'Server seed' | translate}}</label>
+                <div class="col-sm-9">
+                    <input readonly="readonly" type="text" class="form-control" id="now_server_seed">
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-3 control-label">{{'Server hash' | translate}}</label>
+                <div class="col-sm-9">
+                    <input readonly="readonly" type="text" class="form-control" id="now_server_hash">
+                </div>
+            </div>
+        </form>
+        <hr>
+        <form class="form-horizontal">
+            <h4>{{'Next hand' | translate}}</h4>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-3 control-label">{{'Client seed' | translate}}</label>
+                <div class="col-sm-9">
+                    <input readonly="readonly" type="text" class="form-control" id="next_client_seed">
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-3 control-label">{{'Server hash' | translate}}</label>
+                <div class="col-sm-9">
+                    <input readonly="readonly" type="text" class="form-control" id="next_server_hash">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="BlackJack"></div>
+</div>

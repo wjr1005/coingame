@@ -1,0 +1,35 @@
+<div class="mini" id="content-header">
+    <h1>Referrer</h1>
+
+</div>
+<div id="breadcrumb">
+    <a href="/" title="" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
+    <a href="javascript:void(0)" class="current">Referrer</a>
+</div>
+
+<div ng-controller="ReferrerController" class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">推荐人 <div style="float:right;">推荐地址：<span class="badge" ng-bind="referrerUrl"></span></div></div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>帐户</td>
+                <td>提成</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in referrerList">
+                    <td>{{item.username}}</td>
+                    <td><span tooltip-html-unsafe="{{item.bonus | dictToHtml}}">{{item.bitcoinValue.toFixedEx(8)}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">说明</div>
+        <div class="panel-body">
+            <p>你推荐来的每个玩家1%的股票会送给你。所以你只需要邀请多个玩家，就可以得到很多的股票。</p>
+        </div>
+    </div>
+</div>

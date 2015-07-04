@@ -1,0 +1,717 @@
+#GameText {
+	display:none;
+	background-image: url("/public/images/transparent_bg.png");
+	border-radius: 15px 15px 15px 15px;
+	color: #00DD58;
+	font-size: 48px;
+	margin-top: 180px;
+	padding: 10px 20px;
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	z-index: 1000;
+}
+#HoldemFrame {
+	height: 750px;
+	width:100%;
+	background: url("/public/games/holdem/images/background.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+	position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+div, ul, li {
+	margin:0px;
+	padding:0px;
+}
+ul li {
+	list-style-type: none;
+}
+#HoldemFrame > .bg {
+	background-color: rgb(17,57,82);
+	background-position: center center;
+	background-repeat: no-repeat;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ff52a45c, endColorstr=#ff08622a)";
+	background-image: -moz-radial-gradient(center -15% 45deg, circle closest-corner, #52a45c -10%, #08622a 180%);
+	background-image: -moz-radial-gradient(center 20% 45deg, circle closest-corner, #52a45c 10%, #08622a 160%);
+	background-image: -webkit-gradient(radial, center -15%, 60, center -15%, 1200, from(#52a45c), to(#08622a));
+	opacity: 0.8;
+	height: 750px;
+	width: 100%;
+	position: absolute;
+	z-index: 0;
+}
+#HoldemFrame .Main {
+    display: none;
+}
+#HoldemFrame .Tool {
+	position: relative;
+	width: 744px;
+    height: 32px;
+	left: 50%;
+	transform:translateX(-50%);
+	-webkit-transform:translateX(-50%);
+	top:0;
+	background-color: #222;
+	border-width: 0 0 1px;
+	border-color: #080808;
+	border-radius: 5px;
+	color: #fff;
+	padding: 4px 6px;
+	line-height: 25px;
+}
+#HoldemFrame .Tool .btn {
+	font-size: 12px;
+	border:1px #000 solid;
+	color: rgb(31,22,3);
+	background-color: rgb(235,212,145);
+	border-radius: 5px;
+	float: left;
+	padding: 3px 6px;
+	display: none;
+}
+#HoldemFrame .Tool .btn.roomBtn {
+    display: block;
+    left: 50%;
+    position: absolute;
+}
+.Tool .btn.Buy{
+}
+#HoldemFrame .Help {
+    position: absolute;
+    left: 50%;
+    width: 200px;
+    margin-left: -500px;
+    margin-top: 94px;
+    text-align: center;
+    z-index: 1000;
+    color: #fff;
+    font-size: 12px;
+}
+#HoldemFrame .Info {
+	color: #fff;
+	position: relative;
+	left: 50%;
+	margin-left: -370px;
+	margin-top: 10px;
+}
+#HoldemFrame  .AddChips {
+    position: absolute;
+    top:150px;
+    left:50%;
+    margin-left: 360px;
+}
+#HoldemFrame #Table {
+	background: url("/public/games/holdem/images/table.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius: 280px;
+	height: 309px;
+	left: 50%;
+	margin-left: -310.5px;
+	position: absolute;
+	top: 140px;
+	width: 621px;
+	z-index: 10;
+}
+.Card {
+	display: block;
+	position: absolute;
+}
+.Card img {
+	width: 100%;
+	z-index:100;
+}
+.Card.important {
+    box-shadow: 0px 0px 10px #f00;
+}
+#HoldemFrame #Table #PotFlop {
+	height: 66px;
+	left: 50%;
+	margin-left: -142.5px;
+	position: absolute;
+	top: 105px;
+	width: 285px;
+}
+#HoldemFrame .Pot {
+	position: absolute;
+	left:50%;
+	width:20px;
+	height: 20px;
+	margin-left: -10px;
+	margin-top: -30px;
+}
+#HoldemFrame #PotFlop .CardType {
+    position: absolute;
+    transform:translateX(-50%);
+    -webkit-transform:translateX(-50%);
+    margin-top: 80px;
+    background-color: rgba(27,27,27,0.5);
+    border-radius: 5px;
+    left: 50%;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 4px;
+    display: none;
+}
+#HoldemFrame #Table #PotFlop .Card {
+	height: 66px;
+}
+#HoldemFrame .Seat {
+	position: absolute;
+	z-index: 9;
+}
+#HoldemFrame #Dealer .People {
+	background: url("/public/games/holdem/images/dealer.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 93px;
+	left: 50%;
+	margin-left: -48px;
+	position: absolute;
+	top: 76px;
+	width: 96px;
+	z-index: 10;
+}
+#HoldemFrame #Dealer .Seat {
+	background: url("/public/games/holdem/images/dealer_seat.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 82px;
+	height: 116px;
+	left: 50%;
+	top:80px;
+	margin-left: -41px;
+}
+#HoldemFrame #Player1 .Seat, #HoldemFrame #Player9 .Seat {
+	background: url("/public/games/holdem/images/seat1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 94px;
+	height: 117px;
+	left: 50%;
+	top:80px;
+	margin-left: 107px;
+}
+#HoldemFrame #Player2 .Seat, #HoldemFrame #Player8 .Seat {
+	background: url("/public/games/holdem/images/seat2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 114px;
+	height: 108px;
+	left: 50%;
+	top:160px;
+	margin-left: 237px;
+}
+#HoldemFrame #Player3 .Seat, #HoldemFrame #Player7 .Seat {
+	background: url("/public/games/holdem/images/seat3.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 112px;
+	height: 102px;
+	left: 50%;
+	top:310px;
+	margin-left: 250px;
+}
+#HoldemFrame #Player4 .Seat, #HoldemFrame #Player6 .Seat {
+	background: url("/public/games/holdem/images/seat4.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 105px;
+	height: 93px;
+	left: 50%;
+	top:400px;
+	margin-left: 120px;
+}
+#HoldemFrame #Player5 .Seat {
+	background: url("/public/games/holdem/images/seat5.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 91px;
+	height: 94px;
+	left: 50%;
+	top:400px;
+	margin-left: -45.5px;
+}
+#HoldemFrame #Player6 .Seat {
+	-moz-transform:scale(-1, 1);
+    -webkit-transform:scale(-1, 1);
+	margin-left: -218px;
+}
+#HoldemFrame #Player7 .Seat {
+	-moz-transform:scale(-1, 1);
+    -webkit-transform:scale(-1, 1);
+	margin-left: -351.5px;
+}
+#HoldemFrame #Player8 .Seat {
+	-moz-transform:scale(-1, 1);
+    -webkit-transform:scale(-1, 1);
+	margin-left: -339.5px;
+}
+#HoldemFrame #Player9 .Seat {
+	-moz-transform:scale(-1, 1);
+    -webkit-transform:scale(-1, 1);
+	margin-left: -199.5px;
+}
+#HoldemFrame .Down {
+	background: url("/public/games/holdem/images/down.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	left: 50%;
+	z-index: 10;
+}
+#HoldemFrame .Down:hover {
+	-moz-transform:scale(1.2);
+	-webkit-transform:scale(1.2);
+	cursor: pointer;
+}
+#HoldemFrame #Player9 .Down {
+	margin-left: -170px;
+	top: 110px;
+}
+#HoldemFrame #Player8 .Down {
+	margin-left: -300px;
+	top: 195px;
+}
+#HoldemFrame #Player7 .Down {
+	margin-left: -310px;
+	top: 345px;
+}
+#HoldemFrame #Player6 .Down {
+	margin-left: -180px;
+	top: 425px;
+}
+#HoldemFrame #Player5 .Down {
+	margin-left: -14px;
+	top: 425px;
+}
+#HoldemFrame #Player4 .Down {
+	margin-left: 158px;
+	top: 425px;
+}
+#HoldemFrame #Player3 .Down {
+	margin-left: 282px;
+	top: 345px;
+}
+#HoldemFrame #Player2 .Down {
+	margin-left: 272px;
+	top: 195px;
+}
+#HoldemFrame #Player1 .Down {
+	margin-left: 142px;
+	top: 110px;
+}
+#HoldemFrame .Box {
+	background: url("/public/games/holdem/images/box.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	position: absolute;
+	width: 63px;
+	height: 63px;
+	left: 50%;
+	z-index: 11;
+	padding: 7px;
+	display: none;
+}
+.Box.turn {
+	box-shadow:0 0 10px 10px #2cb7fe;
+}
+#HoldemFrame #Player1 .Box {
+	margin-left: 125px;
+	top: 94px;
+}
+#HoldemFrame #Player2 .Box {
+	margin-left: 255px;
+	top: 180px;
+}
+#HoldemFrame #Player3 .Box {
+	margin-left: 265px;
+	top: 329px;
+}
+#HoldemFrame #Player4 .Box {
+	margin-left: 141px;
+	top: 409px;
+}
+#HoldemFrame #Player5 .Box {
+	margin-left: -30px;
+	top: 409px;
+}
+#HoldemFrame #Player6 .Box {
+	margin-left: -197px;
+	top: 409px;
+}
+#HoldemFrame #Player7 .Box {
+	margin-left: -326px;
+	top: 329px;
+}
+#HoldemFrame #Player8 .Box {
+	margin-left: -316px;
+	top: 180px;
+}
+#HoldemFrame #Player9 .Box {
+	margin-left: -186px;
+	top: 94px;
+}
+#HoldemFrame .Box .Face {
+	background: url("/public/games/holdem/images/face.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 46px;
+	height: 46px;
+}
+#HoldemFrame .Box .Balance, #HoldemFrame .Box .State {
+	border-radius: 11px;
+	background-color: #000;
+	padding: 2px 4px;
+	width: 100%;
+	text-align: center;
+	position:absolute;
+	font-size: 12px;
+	line-height: 12px;
+	margin-left: -7px;
+}
+#HoldemFrame .Player .UserName {
+	position:absolute;
+	text-align: center;
+	color: #fff;
+	margin-top: -25px;
+	margin-left: -7px;
+	width: 100%;
+    z-index: 20;
+}
+#HoldemFrame .Box .Balance {
+	margin-top: 10px;
+	color: #d58512;
+}
+#HoldemFrame .Box .State {
+	color: rgb(110,165,197);
+	margin-top: 28px;
+}
+#HoldemFrame .Box .Win {
+	background-color: rgb(131,0,0);
+	color: #d58512;
+}
+#HoldemFrame .D {
+	background: url("/public/games/holdem/images/d.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	position: absolute;
+	display: none;
+	width: 16px;
+	height: 16px;
+	left: 50%;
+	z-index: 10;
+}
+#HoldemFrame #Player1 .D {
+	margin-left: 100px;
+	top: 181px;
+}
+#HoldemFrame #Player2 .D {
+	margin-left: 210px;
+	top: 220px;
+}
+#HoldemFrame #Player3 .D {
+	margin-left: 210px;
+	top: 330px;
+}
+#HoldemFrame #Player4 .D {
+	margin-left: 100px;
+	top: 359px;
+}
+#HoldemFrame #Player5 .D {
+	margin-left: -8px;
+	top: 359px;
+}
+#HoldemFrame #Player6 .D {
+	margin-left: -116px;
+	top: 359px;
+}
+#HoldemFrame #Player7 .D {
+	margin-left: -231px;
+	top: 330px;
+}
+#HoldemFrame #Player8 .D {
+	margin-left: -226px;
+	top: 220px;
+}
+#HoldemFrame #Player9 .D {
+	margin-left: -116px;
+	top: 191px;
+}
+#HoldemFrame .Chips {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 50%;
+	z-index: 10;
+}
+
+#HoldemFrame .Pot .Amount, #HoldemFrame .Chips .Amount {
+	background-color: #305b39;
+	border-radius: 2px;
+	color: #fff;
+	display: none;
+	font-size: 12px;
+	left: 25px;
+	padding: 1px 3px;
+	position: absolute;
+}
+#HoldemFrame #Player1 .Chips {
+	margin-left: 130px;
+	top: 210px;
+}
+#HoldemFrame #Player2 .Chips {
+	margin-left: 210px;
+	top: 250px;
+}
+#HoldemFrame #Player3 .Chips {
+	margin-left: 210px;
+	top: 300px;
+}
+#HoldemFrame #Player4 .Chips {
+	margin-left: 130px;
+	top: 340px;
+}
+#HoldemFrame #Player5 .Chips {
+	margin-left: 20px;
+	top: 340px;
+}
+#HoldemFrame #Player6 .Chips {
+	margin-left: -146px;
+	top: 340px;
+}
+#HoldemFrame #Player7 .Chips {
+	margin-left: -226px;
+	top: 300px;
+}
+#HoldemFrame #Player8 .Chips {
+	margin-left: -226px;
+	top: 250px;
+}
+#HoldemFrame #Player9 .Chips {
+	margin-left: -146px;
+	top: 210px;
+}
+#HoldemFrame .Box .Cards {
+	left: 50%;
+	position: absolute;
+	width:56px;
+	height:56px;
+	margin-top: -50px;
+	margin-left: -28px;
+}
+#HoldemFrame .Box .Cards .Card {
+	height:53px;
+}
+#HoldemFrame .ActionFrame {
+	position: absolute;
+	width: 744px;
+	height: 126px;
+	top:510px;
+	left: 50%;
+	margin-left: -372px;
+	background: url("/public/games/holdem/images/action_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	z-index: 1;
+}
+#HoldemFrame .ActionFrame .Record {
+    background: none repeat scroll 0 0 rgba(17, 17, 17, 0.5);
+    border-radius: 10px;
+    color: #ccc;
+    font-size: 12px;
+    height: 115px;
+    left: 5px;
+    padding: 5px;
+    position: absolute;
+    top: 5px;
+    width: 215px;
+    z-index: 2;
+}
+
+#HoldemFrame .ActionFrame .Actions {
+	/*background-color: #000;*/
+    border-radius: 10px;
+	height: 95px;
+	left: 50%;
+	margin-left: -145px;
+	padding: 5px;
+	position: absolute;
+	top: 20px;
+	width: 290px;
+	color: #fff;
+	text-align: center;
+}
+.Yellow {
+	color: #D39204;
+}
+#HoldemFrame .ActionFrame .Actions .Join, #HoldemFrame .ActionFrame .Actions .Start {
+	display: none;
+}
+#HoldemFrame .Check, #HoldemFrame .Call, #HoldemFrame .Fold, #HoldemFrame .Raise, #HoldemFrame .Fold, #HoldemFrame .AllIn {
+	display: none;
+}
+#HoldemFrame .ActionFrame .Actions .Start button {
+	background: url("/public/games/holdem/images/btn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	width: 123px;
+	height: 30px;
+	border: 0;
+	padding-bottom:3px;
+	color: #fff;
+	margin: 5px;
+}
+#HoldemFrame .ActionFrame .Actions .Start button span {
+	position: relative;
+	left:-20px;
+}
+#HoldemFrame .ActionFrame .Actions .StartBtn {
+	background: url("/public/games/holdem/images/startbtn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	left: 50%;
+	margin-left: -79px;
+	margin-top: -20px;
+	position: absolute;
+	top: 50%;
+	width: 158px;
+	height: 40px;
+	border: 0;
+	font-size: 20px;
+	color: #fff;
+	font-weight: bold;
+}
+#HoldemFrame .ActionFrame .Actions .StartBtn:hover {
+	border-radius: 5px;
+	/*background:-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));*/
+    background-image: -moz-linear-gradient(top, #3688cf, #72c1fa); /* Firefox */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3688cf), color-stop(1, #72c1fa)); /* Saf4+, Chrome */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3688cf', endColorstr='#72c1fa', GradientType='0'); /* IE*/
+}
+#HoldemFrame .ActionFrame .Chat {
+	height: 112px;
+	left: 525px;
+	position: absolute;
+	top: 3px;
+	width: 210px;
+	color: #ccc;
+}
+#HoldemFrame .MsgTop{
+    clear: both;
+}
+#HoldemFrame .ActionFrame .Chat input {
+	height: 18px;
+    width: 164px;
+	padding: 0px 3px;
+	background-color: rgba(17,17,17,0.5);
+	border-radius: 5px;
+	border:0;
+	color: #ccc;
+    float: left;
+    margin-bottom: 2px;
+}
+#HoldemFrame .ActionFrame .Chat .MsgContent {
+	margin-top: 2px;
+	background-color: rgba(17,17,17,0.5);
+	border-radius: 10px;
+	height: 95px;
+	padding:5px;
+	width: 210px;
+    clear: both;
+    font-size: 12px;
+}
+#HoldemFrame .MsgSendBtn{
+    font-size: 10px;
+    border:1px #000 solid;
+    color: #fff;
+    width: 40px;
+    height: 18px;
+    background-color: rgb(27,27,27);
+    margin-left: 5px;
+    border-radius: 5px;
+    float: left;
+}
+#HoldemFrame .ActionFrame .Chat .UserName {
+	color: #fff;
+}
+#Pot {
+	width: 200px;
+	height: 50px;
+	left: 50%;
+	margin-left: -100px;
+	border: 1px solid #E5E5E5;
+	position:absolute;
+	top:30px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 23px;
+}
+.Shoe {
+	height: 50px;
+	left: 50%;
+	margin-left: -30px;
+	margin-top: 30px;
+	position: absolute;
+	width: 60px;
+}
+.ChipSm {
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	display: block;
+	height: 60px;
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+}
+.ChipSm.Bet10000 {
+    background-image: url("/public/images/chips/bet10000.png");
+}
+.ChipSm.Bet1000 {
+    background-image: url("/public/images/chips/bet1000.png");
+}
+.ChipSm.Bet100 {
+	background-image: url("/public/images/chips/bet100.png");
+}
+.ChipSm.Bet10 {
+	background-image: url("/public/images/chips/bet10.png");
+}
+.ChipSm.Bet0_001 {
+	background-image: url("/public/images/chips/bet0_001.png");
+}
+.ChipSm.Bet0_01 {
+	background-image: url("/public/images/chips/bet0_01.png");
+}
+.ChipSm.Bet0_1 {
+	background-image: url("/public/images/chips/bet0_1.png");
+}
+.ChipSm.Bet1 {
+	background-image: url("/public/images/chips/bet1.png");
+}
+
+/* Common style of SVGs */
+.Progress {
+    display: none;
+}
+.Progress svg {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.Progress svg path {
+    fill: none;
+}
+
+.Progress svg.progress-circle path {
+    stroke: #1ECD97;
+    stroke-width: 5;
+}
+#Actions .btn-group {
+	position:absolute;
+	top: 720px;
+	left: 50%;
+	margin-left: -84px;
+	display: none;
+}
+#Join {
+	position:absolute;
+	top: 760px;
+	left: 50%;
+	width:50px;
+	margin-left: -25px;
+}
+.Room {
+    position:absolute;
+    left:50%;
+    margin-left:-200px;
+    width:400px;
+    color:#000;
+    margin-top:100px;
+    z-index:1000;
+    background-color: #fff;
+    border-radius: 4px;
+    display:none;
+}
+.Room table tr {
+    cursor: pointer;
+}
+.nano-content {
+    word-break:break-all;word-wrap : break-word ;
+}

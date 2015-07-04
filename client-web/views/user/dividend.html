@@ -1,0 +1,107 @@
+<div class="mini" id="content-header">
+    <h1>{{'Dividend' | translate}}</h1>
+
+</div>
+<div id="breadcrumb">
+    <a href="/" title="" class="tip-bottom"><i class="fa fa-home"></i> {{'Home' | translate}}</a>
+    <a href="javascript:void(0)" class="current">{{'Dividend' | translate}}</a>
+</div>
+
+<link rel="stylesheet" href="/public/lib/ui-select/select.min.css"/>
+<style>
+    .bootstrap-select.btn-group {
+        margin-bottom: 0px;
+    }
+</style>
+
+
+<div ng-controller="StockController" class="container-fluid row">
+<div class="col-xs-12">
+  <div class="alert alert-info" role="alert">
+      <div class="media-left" style="min-width: 70px;">{{'Progress' | translate}}</div>
+      <div class="media-body">
+          <div class="progress progress-striped" style="margin-bottom: -20px;">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{(siteStockNumber/playerStockNumber)*100}}%"> <span style="color:#000;">{{siteStockNumber}}/{{playerStockNumber}}</span> </div>
+          </div>
+      </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="icon"><i class="fa fa-money"></i></span>{{'Exchange ratio' | translate}}</div>
+    <table class="table table-striped">
+      <tr>
+        <td ng-repeat="(key,value) in coinScale"><span ng-bind="key"></span></td>
+      </tr>
+      <tr>
+        <td ng-repeat="(key,value) in coinScale"><span ng-bind="(value/10*times).toFloat(4)"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{'Share out bonus' | translate}}:<span class="badge" ng-bind="siteHaveDividend.toFixedEx(8)"></span>BTC &nbsp;&nbsp;{{'Undistributed dividend' | translate}}:<span class="badge" ng-bind="siteProfit.toFixedEx(8)"></span>BTC  &nbsp;&nbsp;{{'Dividend per share' | translate}}:<span class="badge" ng-bind="perShare.toFixedEx(8)"></span>BTC</div>
+    <table class="table table-striped">
+      <tr>
+        <td ng-repeat="(key,value) in siteProfitDict">{{key}}</td>
+      </tr>
+      <tr>
+        <td ng-repeat="(key,value) in siteProfitDict">{{value.toFixedEx(4)}}</td>
+      </tr>
+    </table>
+  </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="icon"><i class="glyphicon glyphicon-time"></i></span>{{'Website dividend history' | translate}}</div>
+        <table class="table table-striped">
+            <tr>
+                <td>{{'Date' | translate}}</td>
+                <td>{{'Dividend' | translate}}</td>
+            </tr>
+            <tr ng-repeat="item in siteShareDividendHistorys">
+                <td style="line-height:32px;">{{item.date | toTimeStr}}</td>
+                <td style="line-height:32px;">
+                    <a href="javascript:void(0)" tooltip-html-unsafe="{{siteShareDividendHistorys[$index].dividends | dictToHtml}}">{{siteShareDividendHistorys[$index].profit.toFixedEx(8)}}</a> BTC
+               </td>
+           </tr>
+       </table>
+   </div>
+   <div ng-show="isAuthenticated()" class="panel panel-primary">
+       <div class="panel-heading">{{'My stock' | translate}}</div>
+       <table class="table table-striped">
+           <tr>
+               <td>{{'Stock' | translate}}</td>
+               <td>{{'Have dividend' | translate}}</td>
+               <td>{{'Not dividend' | translate}}</td>
+           </tr>
+           <tr>
+               <td id="coinNumber" style="line-height:32px;"><span ng-bind="myStockBalance.toInt()"></span> <span ng-if="myInternalStockBalance"> + {{myInternalStockBalance.toInt()}} = {{(myInternalStockBalance+myStockBalance).toInt()}}</span></td>
+               <td style="line-height:32px;">
+                   <a href="javascript:void(0)" tooltip-html-unsafe="{{myShareDividendDict | dictToHtml}}">{{userHaveDividend.toFixedEx(8)}}</a> BTC
+                </td>
+                <td style="line-height:32px;">
+                    <a href="javascript:void(0)" tooltip-html-unsafe="{{myNotShareDividendDict | dictToHtml}}">{{myStockProfit.toFixedEx(8)}}</a> BTC
+               </td>
+           </tr>
+       </table>
+   </div>
+
+ <div ng-show="isAuthenticated()" class="panel panel-primary">
+   <div class="panel-heading">{{'My dividend record' | translate}}</div>
+   <table class="table table-striped">
+     <tr>
+       <td>{{'Date' | translate}}</td>
+       <td>{{'Dividend' | translate}}</td>
+     </tr>
+     <tr ng-repeat="item in myShareDividendHistorys">
+       <td style="line-height:32px;" ng-bind="item.date | toTimeStr"></td>
+       <td style="line-height:32px;">
+           <a href="javascript:void(0)" tooltip-html-unsafe="{{myShareDividendHistorys[$index].dividends | dictToHtml}}">{{myShareDividendHistorys[$index].profit.toFixedEx(8)}}</a> BTC
+      </td>
+    </tr>
+  </table>
+</div>
+  <div class="panel panel-default">
+      <div class="panel-heading">{{'Description' | translate}}</div>
+      <div class="panel-body">
+          <div ng-include="'/views/info/stock.html'"></div>
+      </div>
+  </div>
+</div>
+</div>

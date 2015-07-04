@@ -1,0 +1,33 @@
+
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel();" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">{{'Deposits' | translate}}</h4>
+    </div>
+    <div class="modal-body" style="text-align:center;">
+      <div style="color:#F00;text-align:center;"></div>
+      <div>
+            <div ng-if="address">
+            	<div ng-switch on="coin">
+            		<div ng-switch-when="NextCoin">
+	            		<h3 style="word-wrap:break-word;">{{address.split(':')[0]}}</h3>
+	            		<span ng-if="address.split(':')[1]"><h5>publicKey:{{address.split(':')[1]}}</h5>
+	            	</div>
+	            	<div ng-switch-when="DarkNetCoin">
+						<h4 style="word-wrap:break-word;">DBFFYUnpfh7SYC5oHMiPxqNvvxjs18LHq8Ld1nenyU9m7knhPh5Zgz1Nj6HxSxfBPG4U7NSHneiHqLcSshrvmsBGA4unrc2</h4>
+						充值时，点击more options,在payment id那一栏输入一下字符
+						<p>Payment id: {{address}}</p>
+	            	</div>
+	            	<div ng-switch-default>
+		            	<h3 style="word-wrap:break-word;" ng-bind="address"></h3>
+		                <small ng-if="coin=='Ripple'">{{'Because of Ripple accounts for at least 20 XRP top-up for the first time, the actual account would be less 20 XRP.' | translate}}</small>
+		                <small ng-if="coin=='Stellar'">{{'Because of Stellar accounts must be at least 50 STR top-up for the first time, the actual account would be less 50 STR.' | translate}}</small>
+	            	</div>
+            	</div>
+
+            </div>
+            <button ng-if="!address" type="button" class="btn btn-success" ng-disabled="disable" data-loading-text="Loading..." ng-click="createDeposit();">{{'Create receiving address' | translate}}</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="cancel();">{{'Close' | translate}}</button>
+    </div>

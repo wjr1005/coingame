@@ -1,0 +1,31 @@
+<div class="mini" id="content-header">
+    <h1>{{'Profile' | translate}}</h1>
+
+</div>
+<div id="breadcrumb">
+    <a href="/" title="" class="tip-bottom"><i class="fa fa-home"></i> {{'Home' | translate}}</a>
+    <a href="javascript:void(0)" class="current">{{'Profile' | translate}}</a>
+</div>
+<div ng-controller="ProfileController">
+    <div class="container-fluid row">
+        <div class="col-xs-12 col-md-6">
+            <div ng-include src="'/views/user/change_email.html'"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div ng-include src="'/views/user/change_password.html'"></div>
+        </div>
+    </div>
+    <div class="container-fluid row">
+        <div class="col-xs-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><span class="icon"><i class="glyphicon glyphicon-phone"></i></span>{{'Two factor authenTication' | translate}}</div>
+                <div class="panel-body">
+                    <div ng-controller="TwoFactorController" ui-view>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

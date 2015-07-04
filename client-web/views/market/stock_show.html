@@ -1,0 +1,248 @@
+<div ng-controller="MarketStockController">
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-12">
+        <div style="text-align: center;">24H Volume(<span ng-bind="coin"></span>)<strong style="margin: 0px 5px;" ng-bind="todayTradInfo.amount.ToInt().FormatNumber()"></strong>  24H Volume(BTC)<strong id="coinBalance" style="margin: 0px 5px;" ng-bind="todayTradInfo.balance.toFixed(4)"></strong></div>
+        <div id="trade_main">
+            <div style="position: relative;top:18px;float:right;z-index:99;width:170px">
+                <!--<a href="#" id="sosobtcBTN">高级</a>!-->
+                <a href="javascript:void(0)" ng-click="get5minLine()" style="color:#3377AA" id="fiveLineBTN">5min</a>
+                <a href="javascript:void(0)" ng-click="getTimeLine()" style="color:#3377AA" id="timeLineBTN">Hourly</a>
+                <a href="javascript:void(0)" ng-click="getDayLine" style="color:#3377AA" id="dayLineBTN">Daily</a>
+            </div>
+            <div id="graphbox" style=" min-width: 200px; border:1px #F0F0F0 solid; height:330px;"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="isAuthenticated()" class="row"  style="margin-bottom: 20px;">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading"><img src="/public/images/buy.png"> {{'Buy' | translate}} <span ng-bind="coin"></span></div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Amount' | translate}} <span ng-bind="coin"></span></div>
+                        <div class="col-xs-6">
+                            <input type="number" class="form-control input-sm" ng-model="buyAmount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Price Per' | translate}} <span ng-bind="coin"></span>/BTC</div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-sm" ng-model="buyPrice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Total' | translate}} (BTC)</div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-sm" ng-model="buyTotal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label"><span ng-bind="fee*100"></span>% {{'Fee' | translate}} (BTC)</div>
+                        <div class="col-xs-6 control-label" style="text-align: left;">
+                            <span ng-bind="buyFee.toFixed(8)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Net Total' | translate}} (BTC)</div>
+                        <div class="col-xs-6 control-label" style="text-align: left;">
+                            <span ng-bind="buyNetTotal.toFixed(8)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6 control-label"><span ng-bind="buyBalance.toFixed(8)"></span> BTC {{'Available' | translate}}</div>
+                        <div class="col-xs-6">
+                            <button class="btn btn-success btn-sm" id="buyBtn" ng-click="trade('buy')">{{'Submit Buy Order' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><img src="/public/images/sell.png"> {{'Sell' | translate}} <span ng-bind="coin"></span></div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Amount' | translate}} <span ng-bind="coin"></span></div>
+                        <div class="col-xs-6">
+                            <input type="number" class="form-control input-sm" ng-model="sellAmount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Price Per' | translate}} <span ng-bind="coin"></span>/BTC</div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-sm" ng-model="sellPrice">
+                        </div>
+                        <div class="col-xs-4 control-label small" style="text-align: left;" ng-if="CoinLastPrice[coin]">(RP:<span ng-bind="CoinLastPrice[coin].toFixedEx(8)"></span></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Total' | translate}} (BTC)</div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-sm" value="0.0000000" ng-model="sellTotal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label"><span ng-bind="fee*100"></span> {{'Fee' | translate}} (BTC)</div>
+                        <div class="col-xs-6 control-label" style="text-align: left;">
+                            <span ng-bind="sellFee.toFixed(8)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label">{{'Net Total' | translate}} (BTC)</div>
+                        <div class="col-xs-6 control-label" style="text-align: left;">
+                            <span ng-bind="sellNetTotal.toFixed(8)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6 control-label"><span ng-bind="sellBalance.toFixed(8)"></span> <span ng-bind="coin"></span> {{'Available' | translate}}</div>
+                        <div class="col-xs-6">
+                            <button class="btn btn-danger btn-sm" id="sellBtn" ng-click="trade('sell')">{{'Submit Sell Order' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="isAuthenticated()" style="margin-bottom: 20px;">
+    <tabset>
+        <tab heading="{{'Trading' | translate}}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading"><img src="/public/images/order.png"> {{'Sell orders' | translate}}</div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>{{'Price' | translate}} (<span ng-bind="coin"></span>)</th>
+                                <th>{{'Amount' | translate}}</th>
+                                <th>{{'Total' | translate}} (BTC)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in mySellOrders">
+                                <td>{{item.price.toFixedEx(8)}}</td>
+                                <td>{{item.amount.toFixedEx(8)}}</td>
+                                <td>{{(item.amount*item.price).toFixedEx(8)}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading"><img src="/public/images/order.png"> {{'Buy orders' | translate}}</div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>{{'Price' | translate}} (<span ng-bind="coin"></span>)</th>
+                                <th>{{'Amount' | translate}}</th>
+                                <th>{{'Total' | translate}} (BTC)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in myBuyOrders">
+                                <td>{{item.price.toFixedEx(8)}}</td>
+                                <td>{{item.amount.toFixedEx(8)}}</td>
+                                <td>{{(item.amount*item.price).toFixedEx(8)}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{'My orders' | translate}}">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>{{'Date' | translate}}</th>
+                                <th>{{'Type' | translate}}</th>
+                                <th>{{'Price' | translate}}</th>
+                                <th>{{'Amount' | translate}} (<span class="fromCoin"><span ng-bind="coin"></span></span>)</th>
+                                <th>{{'Total' | translate}}</span>(<span class="toCoin">BTC</span>)</th>
+                                <th>{{'Action' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in myOrders">
+                                <td>{{item.date | toTimeStr}}</td>
+                                <td style="color:{{item.type=='buy'?'green':'red'}};">{{item.type=='buy'?'Buy':'Sell'}}</td>
+                                <td>{{item.price.toFixedEx(8)}}</td>
+                                <td>{{item.amount.toFixedEx(8)}}</td>
+                                <td>{{(item.price*item.amount).toFixedEx(8)}}</td>
+                                <td><button ng-click="cancleOrder(item.id)" class="btn btn-success btn-xs">Cancle</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="msgActiveOrder"></div>
+                    </div>
+
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{'Trade history' | translate}}">
+            <div class="panel panel-default">
+                <table class="table table-striped">
+                    <thead>
+                    <tr style="font-weight:bold;">
+                        <th>{{'Date' | translate}}</th>
+                        <th>{{'Type' | translate}}</th>
+                        <th>{{'Price' | translate}} (BTC)</th>
+                        <th>{{'Amount' | translate}}</th>
+                        <th>{{'Total' | translate}} BTC</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in myHistory">
+                        <td>{{item.date | toTimeStr}}</td>
+                        <td style="color:{{item.type=='buy'?'green':'red'}};">{{item.type=='buy'?'Buy':'Sell'}}</td>
+                        <td>{{item.price.toFixedEx(8)}}</td>
+                        <td>{{item.amount.toFixedEx(8)}}</td>
+                        <td>{{(item.price*item.amount).toFixedEx(8)}}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </tab>
+    </tabset>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><img src="/public/images/history.png"> {{'Market Trade History(Last 20)' | translate}}</div>
+            <table id="tblUserOrders" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>{{'Date' | translate}}</th>
+                    <th>{{'Type' | translate}}</th>
+                    <th>{{'Price' | translate}} (BTC)</span></th>
+                    <th>{{'Amount' | translate}}</th>
+                    <th>{{'Total' | translate}} BTC</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in allOrders">
+                    <td>{{item.date | toTimeStr}}</td>
+                    <td style="color:{{item.type=='buy'?'green':'red'}};">{{item.type=='buy'?'Buy':'Sell'}}</td>
+                    <td>{{item.price.toFixedEx(8)}}</td>
+                    <td>{{item.amount.toFixedEx(8)}}</td>
+                    <td>{{(item.price*item.amount).toFixedEx(8)}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="msgActiveOrder"></div>
+        </div>
+    </div>
+</div>
+</div>

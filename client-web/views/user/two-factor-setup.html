@@ -1,0 +1,26 @@
+<form name="formEnableTwoFactor" class="form-validation" ng-submit="enableTwoFactor()" novalidate>
+    <div class="row">
+        <div class="col-lg-4">
+            <img ng-src="{{twoFactor.qrImage}}"/>
+        </div>
+        <div class="col-lg-8">
+            <p class="color-gray-light">{{'Alternative manual key' | translate}}: <b class="color-warning ng-binding">{{twoFactor.secret}}</b></p>
+            <div class="form-group">
+                <label for="">{{'Two Factor Code' | translate}}</label>
+                <input class="form-control" ng-model="twoFactorEnable.code" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" ng-class="{'loading': isLoading}" ng-disabled="!formEnableTwoFactor.$valid">{{'Enable Two Factor' | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="callout callout-warning" style="margin-bottom: 5px">
+                <h4>Two Factor Authentication</h4>
+                <p>To enable Two Factor authentication, first scan the QR code with your mobile TOTP application type in the alternative key. Confirm the process with a Two Factor Key.</p>
+            </div>
+        </div>
+    </div>
+</form>
+    

@@ -1,0 +1,23 @@
+<form name="formDisableTwoFactor" class="form-validation" novalidate ng-submit="disableTwoFactor()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="bs-callout bs-callout-success">
+                <h4>Two Factor Authentication is enabled <i class="fa fa-check"></i></h4>
+                <p>To disable Two Factor authentication, type in the provided code of your mobile two factor application.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-5">
+            <input class="form-control"
+                   required
+                   ng-model="twoFactorDisable.code"
+                   placeholder="Two Factor Code"
+                    >
+        </div>
+        <button type="submit"
+                class="btn btn-success"
+                ng-disabled="!formDisableTwoFactor.$valid"
+                >{{'Disable Two Factor' | translate}}</button>
+    </div>
+</form>

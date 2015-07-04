@@ -1,0 +1,46 @@
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">
+        <span ng-show="!isauth">{{'Enable Google Authenticator' | translate}}</span>
+        <span ng-show="isauth">{{'Disable Google Authenticator' | translate}}</span>
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div id="auth-message" style="color:#F00;text-align:center;">
+          <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+      </div>
+      <div ng-show="!isauth" style="width:450px; height:250px;">
+        <div>
+          <div style="float:left; width:166px; height:166px; margin:10px 10px;">
+            <div style="text-align:center;" id="qrcode"><img src="{{qrcode}}" width="166" height="166" /></div>
+            <div style="text-align:center; line-height:25px; font-size:10px;" ng-bind="secret"></div>
+          </div>
+          <div id="googleAuthDesc">
+            <p>Scan the above QR code (or use the key below the QR code to enter manually) with your Google authenticator app (download it here: Android or IOS) or any other application that implements the RFC6238 time-based one time password generation algorithm.</p>
+            <div class="col-lg-6">
+              <input type="text" ng-model="code" id="securityCode" class="form-control" required>
+            </div>
+            <span class="help-block error-text"></span> </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div style="clear:both; margin-top:10px;">Make a backup copy of the code under the QR code on paper for when you lose or reset your phone!</div>
+      </div>
+      <div ng-show="isauth" class="form-horizontal">
+        <div class="form-group">
+          <label for="securityCode" class="col-sm-2 control-label">{{'Two Factor Code' | translate}}</label>
+          <div class="col-sm-7">
+            <input class="form-control" name="securityCode" type="text" id="securityCode" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="cancel();">{{'Close' | translate}}</button>
+      <button type="button" class="btn btn-primary" ng-click="OpenAuth(isauth);">{{'Confirm' | translate}}</button>
+    </div>
+  </div>
+  <!-- /.modal-content --> 
+</div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

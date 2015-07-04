@@ -1,0 +1,117 @@
+<style>
+    .progress {
+        height: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="container-fluid" ng-controller="CrowdfundingShowController" style="padding-top: 15px;">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="javascript:history.back(-1)" class="returnIcon"><i class="fa fa-reply"></i></a>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-default" href="/crowdfunding/edit/{{id}}" ng-if="myUserName==createUser">编辑</a>
+                    </div>
+                    <div class="page-header">
+                        <h1 ng-bind="title"></h1>
+                    </div>
+                    <tabset>
+                        <tab heading="众筹方案">
+                            <div ng-bind-html="content"></div>
+                            <div class="bs-callout bs-callout-info">
+                                <p>游戏上线后，游戏收入的70%归投资者所有，平台只收取30%的维护费用。</p>
+                            </div>
+                        </tab>
+                        <tab heading="项目进度">
+                            <div class="project-process">
+                                <div class="pull-right" ng-if="myUserName==createUser" style="position: relative;z-index: 10;">
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="addProgress()">填加进度</button>
+                                </div>
+                                <ul>
+                                    <li ng-repeat="item in progressList">
+                                        <i></i>
+                                        <h4>{{item.title}}</h4>
+                                        <p>{{item.content}}</p>
+                                        <p>
+                                            <div class="pull-right">
+                                        {{item.date | toTimeStr}}
+                                            </div>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </tab>
+                        <!--<tab heading="评论">-->
+                        <!--</tab>-->
+                    </tabset>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12">
+                            <span class="pull-left">已筹资:<i class="fa fa-btc"></i><span ng-bind="pledged"></span></span> <span class="pull-right">目标:<i class="fa fa-btc"></i><span ng-bind="goal"></span></span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="pull-left">
+                                <span ng-bind="progress"></span>% 完成
+                            </span>
+                            <span class="pull-right">
+                                <span ng-if="daysLeft<0">
+                                    <span class="label label-success" ng-if="progress >= 100">成功</span>
+                                    <span class="label label-danger" ng-if="progress < 100">失败</span>
+                                </span>
+                                <span ng-if="daysLeft>=0">
+                                    <span ng-bind="days-daysLeft"></span>天/<span ng-bind="days"></span>天 剩余
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="pull-left">股票名</span> <span class="pull-right"><a href="" ng-bind="symbol"></a></span>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="list-group-item">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-xs-12">-->
+                                <!--<span class="pull-left">发行量</span> <span class="pull-right">1,000,000</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                </ul>
+                <div ng-show="isAuthenticated()" class="panel-body">
+                    <form class="form-inline" ng-submit="subscribe()" novalidate>
+                        <div class="form-group">
+                            <label class="sr-only">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-btc"></i></div>
+                                <input type="text" class="form-control" ng-model="amount">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">认购</button>
+                    </form>
+                    <p>BTC余额：<span class="badge" ng-bind="balance.toFixedEx(8)"></span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,10 @@
+document.write('<script src="config.js"></script>');
+// document.write('<script src="/public/share.js"></script>');
+// document.write('<script src="/public/coins.js"></script>');
+// document.write('<script src="app.js"></script>');
+document.write('<script src="site.js"></script>');
+// document.write('<script src="directives.js"></script>');
+// document.write('<script src="fiters.js"></script>');
+// document.write('<script src="services.js"></script>');
+// document.write('<script src="router.js"></script>');
+// document.write('<script src="controllers.js"></script>');

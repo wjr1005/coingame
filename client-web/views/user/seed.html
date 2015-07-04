@@ -1,0 +1,27 @@
+
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel();">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">Verification</h4>
+    </div>
+    <div class="modal-body">
+      <div id="seed_msg" style="color:#F00;text-align:center;"></div>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-xs-3">Client Seed</label>
+          <div class="col-xs-6">
+            <input type="text" id="client_seed" ng-change="ChangeClientSeed();" name="client_seed" placeholder="Client Seed" class="form-control" ng-model="cseed">
+          </div>
+            <label class="control-label col-xs-3" style="text-align:left;"></label>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-xs-3">Server Seed Hash</label>
+          <div class="col-xs-6">
+            <textarea id="server_seed_hash" disabled="" class="input-large form-control" style="width:100%; height:80px;" ng-model="shash"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="cancel();">Close</button>
+      <button type="button" class="btn btn-success" ng-click="random();">Randomize</button>
+    </div>
