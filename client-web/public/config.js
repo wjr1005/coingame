@@ -1,4 +1,4 @@
-var siteVer = '3.5.1';
+var siteVer = '3.5.2';
 var domain = 'www.coingame.io';
 var parsedUrl = 'https:';
 var BlackJackServer = parsedUrl+'//'+domain+':9000';
