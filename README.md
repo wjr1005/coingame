@@ -1,4 +1,4 @@
-# https://www.coingame.io
+# https://github.com/wjr1005/coingame
 币游web客户端源码
 
 安装方法<br>
